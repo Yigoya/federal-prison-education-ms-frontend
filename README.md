@@ -1,17 +1,17 @@
 # FDRE prison College managment system Frontend
 
-welcome to FDRE college system build using React, tailwind and vite
-this system dedicated to FDRE aliti prison prisoners to control and manage Educational process
+Welcome to FDRE college system build using React, tailwind and vite
+this system dedicated to FDRE kaliti prison prisoners to control and manage Educational process
 
 ## Get Started
 
-these are instructions will guide you to set up and run in your local machine.
+These are instructions will guide you to set up and run in your local machine.
 
 ### Prerequisites
 
 - node js
 
-### installection
+### Installation
 
 1. Clone the repository:
 
@@ -35,8 +35,17 @@ The project follows a well-organized directory structure to maintain a clean and
 
   - assets: Static assets like images, videos, and more.
   - components: Reusable UI components.
-  - common: Shared components like Header, Footer, etc.
+
+    - form: components for form
+    - ui: for common components
+
+      [containers ex. nav bar]
+
+  - layout: components that cover entire page.
   - pages: Individual pages of the application.
+  - context: for useContext, context is enough
+  - hooks: functions for request and fetch from backend
+  - data: common variables
   - utils: Utility functions and helpers.
   - App.jsx: Main application component for routing and layout.
   - index.jsx: Entry point of the application.
@@ -51,14 +60,14 @@ The project follows a well-organized directory structure to maintain a clean and
 
 - README.md: Documentation for the project.
 
-## Rules needs to follow
+## Rules to be followed
 
-- don't push to main branch
-- the development branch is the branch we use until we are ready to deploy
+- Don't push to main branch
+- The development branch is the branch we use until we are ready to deploy
 
-### step by step for pushing your code to github
+### Step by step for pushing your code to github
 
-let's say i'm working on dashboard page and after a finish my some feature and wanna push
+Let's say i'm working on dashboard page and after i finished the task wanna push
 
 1. creating local branch: `git checkout -b dashboard`
 2. add changes: `git add .`
@@ -76,4 +85,4 @@ let's say i'm working on dashboard page and after a finish my some feature and w
   ![click to compare and pull request:](./image/ig3.png)
   the rest is for reviews
 
-## happy coding :heart:
+## Happy Coding :heart:
