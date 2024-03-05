@@ -20,6 +20,8 @@ These are instructions will guide you to set up and run in your local machine.
 
     cd federal-prison-education-ms-frontend
 
+    git checkout development
+
     npm i
 ```
 
