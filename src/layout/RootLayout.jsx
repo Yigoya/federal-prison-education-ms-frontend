@@ -4,12 +4,15 @@ import Navbar from '../components/Navbar'
 import SideBar from '../components/SideBar'
 function RootLayout() {
   return (
-    <div>
-      <Navbar />
+    <div className='flex flex-row w-full h-screen gap-8'>
       <SideBar />
+      <div className='bg-slate-400 w-full'>
+        <Navbar />
         <section>
             <Outlet />
         </section>
+      </div>
+      
     </div>
   )
 }

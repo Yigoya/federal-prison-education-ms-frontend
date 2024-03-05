@@ -14,7 +14,6 @@ function App() {
 
   return (
     <>
-      <div>
         <Routes>
           <Route element={<AuthLayout/>}>
               <Route path='/login' element= {<Login/>}/>
@@ -27,7 +26,6 @@ function App() {
             <Route path='/courses' element={<Courses/>}/>
           </Route>
         </Routes>
-      </div>
     </>
   )
 }
