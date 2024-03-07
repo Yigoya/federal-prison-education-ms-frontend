@@ -1,11 +1,12 @@
 # FDRE prison College managment system Frontend
 
-Welcome to FDRE college system build using React, tailwind and vite
+welcome to FDRE college system build using React, tailwind and vite
 this system dedicated to FDRE kaliti prison prisoners to control and manage Educational process
 
 ## Get Started
 
-These are instructions will guide you to set up and run in your local machine.
+these are instructions will guide you to set up and run in your local machine.
+
 
 ### Prerequisites
 
@@ -37,7 +38,7 @@ The project follows a well-organized directory structure to maintain a clean and
 
   - assets: Static assets like images, videos, and more.
   - components: Reusable UI components.
-
+  - pages: Individual pages of the application.
     - form: components for form
     - ui: for common components
 
@@ -48,6 +49,7 @@ The project follows a well-organized directory structure to maintain a clean and
   - context: for useContext, context is enough
   - hooks: functions for request and fetch from backend
   - data: common variables
+
   - utils: Utility functions and helpers.
   - App.jsx: Main application component for routing and layout.
   - index.jsx: Entry point of the application.
@@ -88,3 +90,4 @@ Let's say i'm working on dashboard page and after i finished the task wanna push
   the rest is for reviews
 
 ## Happy Coding :heart:
+
