@@ -9,7 +9,6 @@ import RootLayout from './layout/RootLayout'
 import AuthLayout from './layout/AuthLayout'
 import Login from './pages/Login'
 import Teachers from './pages/Teachers'
-import LanguageSwitcher from './LangSwitcher'
 import { useTranslation } from 'react-i18next'
 import { StudentRegistration } from './pages/StudentRegistration'
 function App() {
@@ -17,8 +16,6 @@ function App() {
   const { t } = useTranslation();
   return (
     <>
-      {/* <LanguageSwitcher />
-      <h1>{t('id')}</h1> */}
         <Routes>
           <Route element={<AuthLayout/>}>
               <Route path='/login' element= {<Login/>}/>
