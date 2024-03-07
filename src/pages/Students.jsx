@@ -1,20 +1,6 @@
 import { useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-
-const columns = [
-  {
-    field: 'image',
-    headerName: 'Profile',
-    width: 130,
-    editable: true,
-    renderCell: (params) => (
-      <img src={params.value} className='h-10 w-10 rounded-3xl' alt='Profile' />
-    ),
-  },
-  { field: 'id', headerName: 'ID Number', width: 130 },
-  { field: 'firstName', headerName: 'First name', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
-];
+import { useTranslation } from 'react-i18next';
 
 const rows = [
   { id: 1, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Snow', firstName: 'Jon', age: 35, image: "https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
@@ -38,15 +24,30 @@ const rows = [
 ];
 
 export default function Students() {
+  const {t} =useTranslation();
+  const columns = [
+    {
+      field: 'image',
+      headerName: t('profile'),
+      width: 130,
+      editable: true,
+      renderCell: (params) => (
+        <img src={params.value} className='h-10 w-10 rounded-3xl' alt='Profile' />
+      ),
+    },
+    { field: 'id', headerName: t('ID'), width: 130 },
+    { field: 'firstName', headerName: t('Fname'), width: 130 },
+    { field: 'lastName', headerName: t('Lname'), width: 130 },
+  ];
+  
   const [selectedRow, setSelectedRow] = useState({id: 0,lastName: 'Y', firstName: 'X', image: 'https://img.freepik.com/premium-vector/user-vector-icon-outline-style-isolated-white-background-mobile-app-website-logotype-ui-human-symbol-man-silhouette-social-member-sign-personal-profile-sign-10-eps_824631-3088.jpg?w=740'});
 
   const handleRowClick = (params) => {
     setSelectedRow(params.row);
   };
-
   return (
     <div className='flex mt-5'>
-      <div className='m-1 bg-stone-200 w-3/5 h-full rounded-2xl'>
+      <div className='m-1 bg-white w-3/5 h-full rounded-2xl'>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -61,9 +62,9 @@ export default function Students() {
         />
       </div>
       {selectedRow && (
-        <div className='m-1 bg-stone-200 w-2/5 h-100% w-2/5 rounded-2xl'>
+        <div className='m-1 bg-white h-100% w-2/5 rounded-2xl'>
           <div className='mt-4 mb-8 ml-4 font-bold text-2xl'>
-            <h1>Personal Information</h1>
+            <h1>{t('personalInfo')}</h1>
           </div>
 
           <div className='flex flex-col place-items-center'>
@@ -73,31 +74,31 @@ export default function Students() {
           </div>
 
           <div>
-                <h1 className='text-xl font-semibold ml-4 mb-4'>Basic Detail: </h1>
+                <h1 className='text-xl font-semibold ml-4 mb-4'>{t('basicDetail')} :</h1>
                 <table className='ml-8'>
                     <tbody>
                       <tr>
-                        <td>Department </td>
+                        <td>{t('department')} </td>
                         <td className='w-20 pl-10'>: </td>
                         <td className="font-semibold">{selectedRow.department}</td>
                       </tr>
                       <tr>
-                        <td>Year </td>
+                        <td>{t('pyear')} </td>
                         <td className='w-20 pl-10'>: </td>
                         <td className="font-semibold">{selectedRow.batch}</td>
                       </tr>
                       <tr>
-                        <td>Section </td>
+                        <td>{t('section')} </td>
                         <td className='w-20 pl-10'>: </td>
                         <td className="font-semibold">{selectedRow.section}</td>
                       </tr>
                       <tr>
-                        <td>Email </td>
+                        <td>{t('email')} </td>
                         <td className='w-20 pl-10'>: </td>
                         <td className="font-semibold">{selectedRow.email}</td>
                       </tr>
                       <tr>
-                        <td>Phone Number </td>
+                        <td>{t('phoneNo')}</td>
                         <td className='w-20 pl-10'>: </td>
                         <td className="font-semibold">{selectedRow.phone}</td>
                       </tr>
