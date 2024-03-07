@@ -46,7 +46,7 @@ export default function Students() {
 
   return (
     <div className='flex mt-5'>
-      <div className='m-1 bg-stone-200 w-3/5 h-full rounded-2xl'>
+      <div className='m-1 bg-white w-3/5 h-full rounded-2xl'>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -61,7 +61,7 @@ export default function Students() {
         />
       </div>
       {selectedRow && (
-        <div className='m-1 bg-stone-200 w-2/5 h-100% w-2/5 rounded-2xl'>
+        <div className='m-1 bg-white h-100% w-2/5 rounded-2xl'>
           <div className='mt-4 mb-8 ml-4 font-bold text-2xl'>
             <h1>Personal Information</h1>
           </div>
