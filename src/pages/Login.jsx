@@ -10,7 +10,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [mess, setMess] = useState("");
 
-
   const handleButtonClick = () => {
     validation();
   };
@@ -19,7 +18,6 @@ const Login = () => {
     const desiredpassword = "admin1234";
     if (email === desiredEmail && password === desiredpassword) {
       setMessage("valid email and password");
-      history.push("/dashboard");
     } else if (email !== "" && password !== "") {
       setMessage("Incorrect password or email");
     } else {
@@ -38,19 +36,27 @@ const Login = () => {
     <div className="full">
       <div className="container">
         <div className="image-section">
-          <img src={img} alt="" style={{ width: "250px", height: "350px" }} />
+          <img
+            src={img}
+            alt=""
+            style={{
+              width: "500px",
+              height: "400px",
+              borderRadius: "40%",
+              objectFit: "contain",
+            }}
+          />
         </div>
         <div className="cover">
           <h1>Login</h1>
 
-          <label htmlFor="email">Email</label>
           <input
             type="email"
             placeholder="Enter your email "
             value={email}
             onChange={handleOnChange}
           />
-          <label htmlFor="password">Password</label>
+
           <input type="password" value={password} onChange={handleChange} />
           <h6 className="forgot">forgot your password?</h6>
           <button onClick={handleButtonClick} className="btn">
