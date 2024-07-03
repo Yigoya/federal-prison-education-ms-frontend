@@ -11,6 +11,7 @@ import Login from './pages/Login'
 import Teachers from './pages/Teachers'
 import { useTranslation } from 'react-i18next'
 import { StudentRegistration } from './pages/StudentRegistration'
+import StaffMembers from './pages/StaffMembers'
 function App() {
   const [count, setCount] = useState(0)
   const { t } = useTranslation();
@@ -26,7 +27,7 @@ function App() {
             <Route path='/students' element= {<Students/>}/>
             <Route path='/studentregistration' element= {<StudentRegistration/>}/>
             <Route path='/courses' element={<Courses/>}/>
-            <Route path='/teachers' element={<Teachers/>}/>
+            <Route path='/teachers' element={<StaffMembers/>}/>
             <Route path='/staffmembers' element={<Courses/>}/>
           </Route>
         </Routes>
