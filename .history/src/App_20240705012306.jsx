@@ -1,19 +1,19 @@
-// import { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import DashBoard from "./pages/DashBoard";
-// import Register from "./pages/Register";
+import Register from "./pages/Register";
 import Students from "./pages/Students";
 import Courses from "./pages/Courses";
 import RootLayout from "./layout/RootLayout";
 import AuthLayout from "./layout/AuthLayout";
 import Login from "./pages/Login";
 import Teachers from "./pages/Teachers";
-// import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { StudentRegistration } from "./pages/StudentRegistration";
 import Classroom from "./pages/Classroom";
 function App() {
-  // const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
   // const { t } = useTranslation();
   return (
     <>

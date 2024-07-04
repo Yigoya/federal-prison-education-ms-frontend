@@ -2,7 +2,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import DashBoard from "./pages/DashBoard";
-// import Register from "./pages/Register";
+import Register from "./pages/Register";
 import Students from "./pages/Students";
 import Courses from "./pages/Courses";
 import RootLayout from "./layout/RootLayout";
