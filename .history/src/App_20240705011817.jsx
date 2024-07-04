@@ -11,7 +11,6 @@ import Login from "./pages/Login";
 import Teachers from "./pages/Teachers";
 import { useTranslation } from "react-i18next";
 import { StudentRegistration } from "./pages/StudentRegistration";
-import Classroom from "./pages/Classroom";
 function App() {
   const [count, setCount] = useState(0);
   const { t } = useTranslation();
@@ -29,7 +28,7 @@ function App() {
           <Route path="/allcourse" element={<Courses />} />
           <Route path="/addcourse" element={<Courses />} />
           <Route path="/managecourse" element={<Courses />} />
-          <Route path="/classroom" element={<Classroom />} />
+          <Route path="/classroom" element={<Cla />} />
           <Route path="/grading" element={<Courses />} />
           <Route path="/staffprofile" element={<Courses />} />
           <Route path="/examscheduling" element={<Teachers />} />
