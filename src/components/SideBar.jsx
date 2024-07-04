@@ -24,7 +24,7 @@ const {t} = useTranslation()
             <Link className='hover:border border-gray-200 rounded-full py-2 px-16 hover:bg-gray-100 hover:text-[#0085FF] inline-block mr-10 ' to='/courses'><FaBook className='inline-block mr-3  text-2xl'/>{t('courses')}</Link>
             <Link className='hover:border border-gray-200 rounded-full py-2 px-14 hover:bg-gray-100 hover:text-[#0085FF] inline-block mr-8' to='/students'> <FaUserGraduate className='inline-block mr-5  text-2xl'  />{t('students')}</Link>
             <Link className='hover:border border-gray-200 rounded-full py-2 px-14 hover:bg-gray-100 hover:text-[#0085FF] inline-block mr-10' to='/teachers'><FaChalkboardTeacher className='inline-block  mr-5  text-2xl'/>{t('staff')}</Link>
-            
+            <Link className='hover:border border-gray-200 rounded-full py-2 px-14 hover:bg-gray-100 hover:text-[#0085FF] inline-block mr-10' to='/classroom'><FaChalkboardTeacher className='inline-block  mr-5  text-2xl'/>{t('classroom')}</Link>
 
           </div>
         </div>
