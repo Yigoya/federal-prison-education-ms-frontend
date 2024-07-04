@@ -12,7 +12,6 @@ import Teachers from './pages/Teachers'
 import { useTranslation } from 'react-i18next'
 import { StudentRegistration } from './pages/StudentRegistration'
 import { ClassNames } from '@emotion/react'
-import Classroom from './pages/Classroom'
 function App() {
   const [count, setCount] = useState(0)
   const { t } = useTranslation();
@@ -30,7 +29,7 @@ function App() {
             <Route path='/courses' element={<Courses/>}/>
             <Route path='/teachers' element={<Teachers/>}/>
             <Route path='/staffmembers' element={<Courses/>}/>
-            <Route path='/classroom' element={<Classroom/>}/>
+            <Route path='/classroom' element={<Class}
           </Route>
         </Routes>
     </>
