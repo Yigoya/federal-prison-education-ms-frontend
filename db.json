@@ -1,0 +1,505 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "img": "../src/assets/images/image.jpg",
+      "name": "Introduction to Accounting",
+      "courseCode": "ACC101",
+      "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+      "type": "Core",
+      "credit": 3,
+      "lectureHour": 3,
+      "departmentId": 1,
+      "gradeId": 1,
+      "preRequisites": [],
+      "instructors": [
+        {
+          "id": 1,
+          "name": "Gorge Morgan",
+          "img": "../src/assets/images/Avatar.jpg",
+          "title": "Teacher",
+          "department": "Department affiliation.",
+          "hiredDate": "21/07/2014",
+          "email": "faculty@email.com",
+          "phone": "+251 90000000000"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "img": "../src/assets/images/image.jpg",
+      "name": "Intermediate Accounting",
+      "courseCode": "ACC201",
+      "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+      "type": "Core",
+      "credit": 3,
+      "lectureHour": 3,
+      "departmentId": 1,
+      "gradeId": 2,
+      "preRequisites": [
+        {
+          "id": 1,
+          "img": "../src/assets/images/image.jpg",
+          "name": "Introduction to Accounting",
+          "courseCode": "ACC101",
+          "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+          "type": "Core",
+          "credit": 3,
+          "lectureHour": 3,
+          "departmentId": 1,
+          "gradeId": 1,
+          "preRequisites": []
+        }
+      ],
+      "instructors": [
+        {
+          "id": 2,
+          "name": "Jane Smith",
+          "img": "../src/assets/images/Avatar.jpg",
+          "title": "Associate Professor",
+          "department": "Accounting Department",
+          "hiredDate": "12/03/2010",
+          "email": "jsmith@email.com",
+          "phone": "+251 911111111"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "img": "../src/assets/images/image.jpg",
+      "name": "Management Principles",
+      "courseCode": "MNG101",
+      "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+      "type": "Core",
+      "credit": 3,
+      "lectureHour": 3,
+      "departmentId": 2,
+      "gradeId": 1,
+      "preRequisites": [],
+      "instructors": [
+        {
+          "id": 3,
+          "name": "John Doe",
+          "img": "../src/assets/images/Avatar.jpg",
+          "title": "Professor",
+          "department": "Management Department",
+          "hiredDate": "05/06/2008",
+          "email": "jdoe@email.com",
+          "phone": "+251 922222222"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "img": "../src/assets/images/image.jpg",
+      "name": "Advanced Management",
+      "courseCode": "MNG201",
+      "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+      "type": "Core",
+      "credit": 3,
+      "lectureHour": 3,
+      "departmentId": 2,
+      "gradeId": 2,
+      "preRequisites": [
+        {
+          "id": 3,
+          "img": "../src/assets/images/image.jpg",
+          "name": "Management Principles",
+          "courseCode": "MNG101",
+          "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+          "type": "Core",
+          "credit": 3,
+          "lectureHour": 3,
+          "departmentId": 2,
+          "gradeId": 1,
+          "preRequisites": []
+        }
+      ],
+      "instructors": [
+        {
+          "id": 4,
+          "name": "Mary Johnson",
+          "img": "../src/assets/images/Avatar.jpg",
+          "title": "Lecturer",
+          "department": "Management Department",
+          "hiredDate": "23/09/2012",
+          "email": "mjohnson@email.com",
+          "phone": "+251 933333333"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "img": "../src/assets/images/image.jpg",
+      "name": "Information and Communication Technology",
+      "courseCode": "ICT101",
+      "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+      "type": "Core",
+      "credit": 3,
+      "lectureHour": 3,
+      "departmentId": 3,
+      "gradeId": 1,
+      "preRequisites": [],
+      "instructors": [
+        {
+          "id": 5,
+          "name": "Paul Brown",
+          "img": "../src/assets/images/Avatar.jpg",
+          "title": "Assistant Professor",
+          "department": "ICT Department",
+          "hiredDate": "17/11/2016",
+          "email": "pbrown@email.com",
+          "phone": "+251 944444444"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "img": "../src/assets/images/image.jpg",
+      "name": "Advanced ICT",
+      "courseCode": "ICT201",
+      "description": "Advanced topics in ICT. Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+      "type": "Core",
+      "credit": 3,
+      "lectureHour": 3,
+      "departmentId": 3,
+      "gradeId": 2,
+      "preRequisites": [
+        {
+          "id": 5,
+          "img": "../src/assets/images/image.jpg",
+          "name": "Information and Communication Technology",
+          "courseCode": "ICT101",
+          "description": "An introduction to ICT concepts. Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+          "type": "Core",
+          "credit": 3,
+          "lectureHour": 3,
+          "departmentId": 3,
+          "gradeId": 1,
+          "preRequisites": []
+        }
+      ],
+      "instructors": [
+        {
+          "id": 6,
+          "name": "Susan White",
+          "img": "../src/assets/images/Avatar.jpg",
+          "title": "Senior Lecturer",
+          "department": "ICT Department",
+          "hiredDate": "30/01/2014",
+          "email": "swhite@email.com",
+          "phone": "+251 955555555"
+        }
+      ]
+    },
+    {
+      "id": "a6bb",
+      "name": "Economics-01",
+      "courseCode": "E-001",
+      "credit": "6",
+      "lectureHour": "2",
+      "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+      "preRequisites": [
+        {
+          "id": "3",
+          "img": "../src/assets/images/image.jpg",
+          "name": "Management Principles",
+          "courseCode": "MNG101",
+          "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+          "type": "Core",
+          "credit": 3,
+          "lectureHour": 3,
+          "departmentId": 2,
+          "gradeId": 1,
+          "preRequisites": [],
+          "instructors": [
+            {
+              "id": 3,
+              "name": "John Doe",
+              "img": "../src/assets/images/Avatar.jpg",
+              "title": "Professor",
+              "department": "Management Department",
+              "hiredDate": "05/06/2008",
+              "email": "jdoe@email.com",
+              "phone": "+251 922222222"
+            }
+          ]
+        }
+      ],
+      "instructor": [
+        {
+          "id": "2",
+          "name": "Jane Smith",
+          "img": "../src/assets/images/Avatar.jpg",
+          "title": "Associate Professor",
+          "department": "Accounting Department",
+          "hiredDate": "12/03/2010",
+          "email": "jsmith@email.com",
+          "phone": "+251 911111111"
+        }
+      ]
+    },
+    {
+      "id": "",
+      "name": "Managment-02",
+      "courseCode": "M-001",
+      "credit": "4",
+      "lectureHour": "2",
+      "description": "hdjaskdjhsak",
+      "preRequisites": [
+        {
+          "id": "1",
+          "img": "../src/assets/images/image.jpg",
+          "name": "Introduction to Accounting",
+          "courseCode": "ACC101",
+          "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+          "type": "Core",
+          "credit": 3,
+          "lectureHour": 3,
+          "departmentId": 1,
+          "gradeId": 1,
+          "preRequisites": [],
+          "instructors": [
+            {
+              "id": 1,
+              "name": "Gorge Morgan",
+              "img": "../src/assets/images/Avatar.jpg",
+              "title": "Teacher",
+              "department": "Department affiliation.",
+              "hiredDate": "21/07/2014",
+              "email": "faculty@email.com",
+              "phone": "+251 90000000000"
+            }
+          ]
+        },
+        {
+          "id": "5",
+          "img": "../src/assets/images/image.jpg",
+          "name": "Information and Communication Technology",
+          "courseCode": "ICT101",
+          "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+          "type": "Core",
+          "credit": 3,
+          "lectureHour": 3,
+          "departmentId": 3,
+          "gradeId": 1,
+          "preRequisites": [],
+          "instructors": [
+            {
+              "id": 5,
+              "name": "Paul Brown",
+              "img": "../src/assets/images/Avatar.jpg",
+              "title": "Assistant Professor",
+              "department": "ICT Department",
+              "hiredDate": "17/11/2016",
+              "email": "pbrown@email.com",
+              "phone": "+251 944444444"
+            }
+          ]
+        }
+      ],
+      "instructor": [
+        {
+          "id": "1",
+          "name": "Gorge Morgan",
+          "img": "../src/assets/images/Avatar.jpg",
+          "title": "Teacher",
+          "department": "Department affiliation.",
+          "hiredDate": "21/07/2014",
+          "email": "faculty@email.com",
+          "phone": "+251 90000000000"
+        },
+        {
+          "id": "3",
+          "name": "John Doe",
+          "img": "../src/assets/images/Avatar.jpg",
+          "title": "Professor",
+          "department": "Management Department",
+          "hiredDate": "05/06/2008",
+          "email": "jdoe@email.com",
+          "phone": "+251 922222222"
+        }
+      ]
+    },
+    {
+      "id": "",
+      "name": "Managment-02",
+      "courseCode": "M-009",
+      "credit": "4",
+      "lectureHour": "2",
+      "description": "nj",
+      "preRequisites": [
+        {
+          "id": "2",
+          "img": "../src/assets/images/image.jpg",
+          "name": "Intermediate Accounting",
+          "courseCode": "ACC201",
+          "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+          "type": "Core",
+          "credit": 3,
+          "lectureHour": 3,
+          "departmentId": 1,
+          "gradeId": 2,
+          "preRequisites": [
+            {
+              "id": 1,
+              "img": "../src/assets/images/image.jpg",
+              "name": "Introduction to Accounting",
+              "courseCode": "ACC101",
+              "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+              "type": "Core",
+              "credit": 3,
+              "lectureHour": 3,
+              "departmentId": 1,
+              "gradeId": 1,
+              "preRequisites": []
+            }
+          ],
+          "instructors": [
+            {
+              "id": 2,
+              "name": "Jane Smith",
+              "img": "../src/assets/images/Avatar.jpg",
+              "title": "Associate Professor",
+              "department": "Accounting Department",
+              "hiredDate": "12/03/2010",
+              "email": "jsmith@email.com",
+              "phone": "+251 911111111"
+            }
+          ]
+        }
+      ],
+      "instructor": [
+        {
+          "id": "3",
+          "name": "John Doe",
+          "img": "../src/assets/images/Avatar.jpg",
+          "title": "Professor",
+          "department": "Management Department",
+          "hiredDate": "05/06/2008",
+          "email": "jdoe@email.com",
+          "phone": "+251 922222222"
+        }
+      ]
+    },
+    {
+      "id": "",
+      "name": "Managment-02",
+      "courseCode": "M-010",
+      "credit": "4",
+      "lectureHour": "2",
+      "description": "nnm,nm,zxc",
+      "preRequisites": [
+        {
+          "id": "1",
+          "img": "../src/assets/images/image.jpg",
+          "name": "Introduction to Accounting",
+          "courseCode": "ACC101",
+          "description": "Not your average bread baking class, this 6-week course shares the joy of making bread from scratch by breaking down the essentials of a great starter and giving expert tips about yeast and flour. You will bake breads such as sourdough, rye, brioche, challah, ciabatta, and popovers while learning about oven heating, mixing, kneading, fermenting, egg washing, and more. Your guests will clamor for the bread basket at your kitchen table and luxuriate in the smell of warm bread in your home after you become part of the ancient tradition of bread baking.",
+          "type": "Core",
+          "credit": 3,
+          "lectureHour": 3,
+          "departmentId": 1,
+          "gradeId": 1,
+          "preRequisites": [],
+          "instructors": [
+            {
+              "id": 1,
+              "name": "Gorge Morgan",
+              "img": "../src/assets/images/Avatar.jpg",
+              "title": "Teacher",
+              "department": "Department affiliation.",
+              "hiredDate": "21/07/2014",
+              "email": "faculty@email.com",
+              "phone": "+251 90000000000"
+            }
+          ]
+        }
+      ],
+      "instructor": [
+        {
+          "id": "2",
+          "name": "Jane Smith",
+          "img": "../src/assets/images/Avatar.jpg",
+          "title": "Associate Professor",
+          "department": "Accounting Department",
+          "hiredDate": "12/03/2010",
+          "email": "jsmith@email.com",
+          "phone": "+251 911111111"
+        }
+      ]
+    }
+  ],
+  "Instructors": [
+    {
+      "id": "1",
+      "name": "Gorge Morgan",
+      "img": "../src/assets/images/Avatar.jpg",
+      "title": "Teacher",
+      "department": "Department affiliation.",
+      "hiredDate": "21/07/2014",
+      "email": "faculty@email.com",
+      "phone": "+251 90000000000"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "img": "../src/assets/images/Avatar.jpg",
+      "title": "Associate Professor",
+      "department": "Accounting Department",
+      "hiredDate": "12/03/2010",
+      "email": "jsmith@email.com",
+      "phone": "+251 911111111"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "img": "../src/assets/images/Avatar.jpg",
+      "title": "Associate Professor",
+      "department": "Accounting Department",
+      "hiredDate": "12/03/2010",
+      "email": "jsmith@email.com",
+      "phone": "+251 911111111"
+    },
+    {
+      "id": "3",
+      "name": "John Doe",
+      "img": "../src/assets/images/Avatar.jpg",
+      "title": "Professor",
+      "department": "Management Department",
+      "hiredDate": "05/06/2008",
+      "email": "jdoe@email.com",
+      "phone": "+251 922222222"
+    },
+    {
+      "id": "4",
+      "name": "Mary Johnson",
+      "img": "../src/assets/images/Avatar.jpg",
+      "title": "Lecturer",
+      "department": "Management Department",
+      "hiredDate": "23/09/2012",
+      "email": "mjohnson@email.com",
+      "phone": "+251 933333333"
+    },
+    {
+      "id": "5",
+      "name": "Paul Brown",
+      "img": "../src/assets/images/Avatar.jpg",
+      "title": "Assistant Professor",
+      "department": "ICT Department",
+      "hiredDate": "17/11/2016",
+      "email": "pbrown@email.com",
+      "phone": "+251 944444444"
+    },
+    {
+      "id": "6",
+      "name": "Susan White",
+      "img": "../src/assets/images/Avatar.jpg",
+      "title": "Senior Lecturer",
+      "department": "ICT Department",
+      "hiredDate": "30/01/2014",
+      "email": "swhite@email.com",
+      "phone": "+251 955555555"
+    }
+  ]
+}
