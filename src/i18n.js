@@ -148,7 +148,7 @@ i18n
         }
     },
     },
-    lng: 'am', // Set default language
+    lng: 'en', // Set default language
   });
 
 export default i18n;
