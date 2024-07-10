@@ -1,112 +1,103 @@
-import { useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect, useState } from 'react';
+import { Table, message, Input } from 'antd';
+import axios from 'axios';
 
-const rows = [
-  { id: 1, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Snow', firstName: 'Jon', age: 35, image: "https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 2, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Lannister', firstName: 'Cersei', age: 42, image: 'https://images.unsplash.com/photo-1604883781269-d121d9ad20f6?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 3, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Lannister', firstName: 'Jaime', age: 45, image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 4, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Stark', firstName: 'Arya', age: 16, image: 'https://images.unsplash.com/photo-1593132289185-e439d9c99c73?q=80&w=1889&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 5, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Targaryen', firstName: 'Daenerys', age: null, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 6, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Melisandre', firstName: null, age: 150, image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 7, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Clifford', firstName: 'Ferrara', age: 44, image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  },
-  { id: 8, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Frances', firstName: 'Rossini', age: 36, image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  },
-  { id: 9, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Roxie', firstName: 'Harvey', age: 65, image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  },
-  { id: 1, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Snow', firstName: 'Jon', age: 35, image: "https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 2, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Lannister', firstName: 'Cersei', age: 42, image: 'https://images.unsplash.com/photo-1604883781269-d121d9ad20f6?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 3, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Lannister', firstName: 'Jaime', age: 45, image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 4, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Stark', firstName: 'Arya', age: 16, image: 'https://images.unsplash.com/photo-1593132289185-e439d9c99c73?q=80&w=1889&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 5, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Targaryen', firstName: 'Daenerys', age: null, image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 6, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Melisandre', firstName: null, age: 150, image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 7, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Clifford', firstName: 'Ferrara', age: 44, image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  },
-  { id: 8, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Frances', firstName: 'Rossini', age: 36, image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  },
-  { id: 9, department: 'Software Engineering', batch: '2024', section: 'E', email: 'someone@smt.com', phone: '0901010101', lastName: 'Roxie', firstName: 'Harvey', age: 65, image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  },
-];
+const { Search } = Input;
 
-export default function Students() {
-  const {t} =useTranslation();
-  const columns = [
-    {
-      field: 'image',
-      headerName: t('profile'),
-      width: 130,
-      editable: true,
-      renderCell: (params) => (
-        <img src={params.value} className='h-10 w-10 rounded-3xl' alt='Profile' />
-      ),
-    },
-    { field: 'id', headerName: t('ID'), width: 130 },
-    { field: 'firstName', headerName: t('Fname'), width: 130 },
-    { field: 'lastName', headerName: t('Lname'), width: 130 },
-  ];
-  
-  const [selectedRow, setSelectedRow] = useState({id: 0,lastName: 'Y', firstName: 'X', image: 'https://img.freepik.com/premium-vector/user-vector-icon-outline-style-isolated-white-background-mobile-app-website-logotype-ui-human-symbol-man-silhouette-social-member-sign-personal-profile-sign-10-eps_824631-3088.jpg?w=740'});
+const Students = () => {
+  const [students, setStudents] = useState([]);
+  const [filteredStudents, setFilteredStudents] = useState([]);
+  const [selectedStudent, setSelectedStudent] = useState(null);
 
-  const handleRowClick = (params) => {
-    setSelectedRow(params.row);
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/register'); // Replace with your API endpoint
+        setStudents(response.data);
+        setFilteredStudents(response.data);
+      } catch (error) {
+        message.error('Error fetching students data');
+      }
+    };
+
+    fetchStudents();
+  }, []);
+
+  const handleRowClick = (record) => {
+    setSelectedStudent(record);
   };
+
+  const handleSearch = (value) => {
+    const filteredData = students.filter(student =>
+      student.name.toLowerCase().includes(value.toLowerCase()) || student.id.toString().includes(value)
+    );
+    setFilteredStudents(filteredData);
+  };
+
+  const studentColumns = [
+    { title: 'Name', dataIndex: 'name', key: 'name' },
+    { title: 'Department', dataIndex: 'department', key: 'department' }
+  ];
+
+  const courseColumns = [
+    { title: "Completed", dataIndex: "completed", key: "completed" },
+    { title: "Ongoing", dataIndex: "ongoing", key: "ongoing" },
+    { title: "Future", dataIndex: "future", key: "future" }
+  ];
+
   return (
-    <div className='flex mt-5'>
-      <div className='m-1 bg-white w-3/5 h-full rounded-2xl'>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          autoHeight={true}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 10 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          onRowClick={handleRowClick}
-        />
-      </div>
-      {selectedRow && (
-        <div className='m-1 bg-white h-100% w-2/5 rounded-2xl'>
-          <div className='mt-4 mb-8 ml-4 font-bold text-2xl'>
-            <h1>{t('personalInfo')}</h1>
-          </div>
-
-          <div className='flex flex-col place-items-center'>
-            <img src={selectedRow.image} alt="Profile" className='h-44 w-44 mb-4 rounded-full'/>
-            <h1 className='text-xl font-semibold'>{selectedRow.firstName} {selectedRow.lastName}</h1>
-            <h2 >FPS {selectedRow.id}</h2>
-          </div>
-
-          <div>
-                <h1 className='text-xl font-semibold ml-4 mb-4'>{t('basicDetail')} :</h1>
-                <table className='ml-8'>
-                    <tbody>
-                      <tr>
-                        <td>{t('department')} </td>
-                        <td className='w-20 pl-10'>: </td>
-                        <td className="font-semibold">{selectedRow.department}</td>
-                      </tr>
-                      <tr>
-                        <td>{t('pyear')} </td>
-                        <td className='w-20 pl-10'>: </td>
-                        <td className="font-semibold">{selectedRow.batch}</td>
-                      </tr>
-                      <tr>
-                        <td>{t('section')} </td>
-                        <td className='w-20 pl-10'>: </td>
-                        <td className="font-semibold">{selectedRow.section}</td>
-                      </tr>
-                      <tr>
-                        <td>{t('email')} </td>
-                        <td className='w-20 pl-10'>: </td>
-                        <td className="font-semibold">{selectedRow.email}</td>
-                      </tr>
-                      <tr>
-                        <td>{t('phoneNo')}</td>
-                        <td className='w-20 pl-10'>: </td>
-                        <td className="font-semibold">{selectedRow.phone}</td>
-                      </tr>
-                    </tbody>
-                </table>
-          </div>
+    <div className='m-8 p-8 bg-white rounded-lg'>
+      <h1 className='text-2xl font-bold mb-4'>Registered Students</h1>
+      <Search
+        placeholder="Search by Name or ID"
+        enterButton="Search"
+        size="medium"
+        onSearch={handleSearch}
+        className='mb-4 w-72 ml-16'
+      />
+      <div className='lg:flex justify-evenly p-4 mx-10 bg-gray-100 rounded-lg'>
+        <div className='w-full px-8 m-3 mt-6'>
+          <Table
+            dataSource={filteredStudents}
+            columns={studentColumns}
+            rowKey='id'
+            onRow={(record) => ({
+              onClick: () => handleRowClick(record)
+            })}
+          />
         </div>
-      )}
+        {selectedStudent && (
+          <div className='w-full px-8 bg-white rounded-lg m-3 lg:mt-6 flex flex-col'>
+            <div className='justify-center mb-5 items-center lg:ml-24 lg:mt-16'>
+              <img src={selectedStudent.profileImage} className='lg:w-44 w-32 lg:h-36 h-24 rounded-full'  />
+            </div>
+            <div className='mt-3'>
+              <p className='p-2'><strong className='lg:px-4'>Name:</strong> {selectedStudent.name}</p>
+              <p className='p-2'><strong className='lg:px-4'>Zone:</strong> {selectedStudent.zone}</p>
+              <p className='p-2'><strong className='lg:px-4'>Age:</strong> {selectedStudent.age}</p>
+              <p className='p-2'><strong className='lg:px-4'>Sentenced Period:</strong> {selectedStudent.sentencedPeriod}</p>
+              <p className='p-2'><strong className='lg:px-4'>Status:</strong> {selectedStudent.status}</p>
+              <p className='p-2'><strong className='lg:px-4'>Language:</strong> {selectedStudent.language}</p>
+              <p className='p-2'><strong className='lg:px-4'>Ethnicity:</strong> {selectedStudent.ethnicity}</p>
+              <p className='p-2'><strong className='lg:px-4'>Department:</strong> {selectedStudent.department}</p>
+            </div>
+          </div>
+        )}
+      </div>     
+      <div className='w-full m-3 mt-8'>
+        {selectedStudent && (
+          <div className='w-full mt-4'>
+            <p className='p-6 font-bold text-2xl'>Courses</p>
+            <Table
+              dataSource={selectedStudent.courses} 
+              columns={courseColumns}
+              rowKey='id'
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
-}
+};
+
+export default Students;

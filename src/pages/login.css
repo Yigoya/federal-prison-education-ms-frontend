@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     box-sizing: border-box;
@@ -13,8 +14,8 @@
 
 .cover {
     background-color: white;
-    width: 35em;
-    height: 35em;
+    width: 30em;
+    height: 25em;
     position: relative;
     border-radius: 1em;
     box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);
@@ -38,10 +39,12 @@
     
 }
 .image-section img {
-    margin-top: 20px;
-    width: 32rem;
-    height: 32rem;
-   
+    margin-top: 2px;
+    width: "200px"; 
+    height: "200px"; 
+    border-radius: "50%";
+    object-fit: contain;
+    
   }
 
 input {
