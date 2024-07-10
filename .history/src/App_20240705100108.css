@@ -1,0 +1,5 @@
+/* Header row background color */
+.ant-table-thead > tr > th {
+    background-color: #0085FF; /* Set your desired background color here */
+    color: #fff; /* Set the text color if needed */
+  }
