@@ -14,6 +14,7 @@ export const StudentRegistration = () => {
 		registrationId: "",
 		sentencedPeriod: "",
 		crimeType: "",
+		dateOfBirth: null,
 		sentenceStartDate: null,
 		releaseWithParole: null,
 		releaseWithoutParole: null,
@@ -21,8 +22,9 @@ export const StudentRegistration = () => {
 		language: "Amharic",
 		ethnicity: "",
 		department: "",
-		profileImage: "",
+		gender: "",
 	});
+	const [file, setFile] = useState(null);
 	const [departments, setDepartments] = useState([]);
 	const [errors, setErrors] = useState({});
 
@@ -48,9 +50,10 @@ export const StudentRegistration = () => {
 		const fetchDepartments = async () => {
 			try {
 				const response = await axios.get(
-					"http://localhost:3001/departments"
+					`${process.env.API_URL}/department/getAllDepartments`
 				); //api to be corrected
-				setDepartments(response.data);
+				console.log(response.data);
+				setDepartments(response.data.departments);
 			} catch (error) {
 				message.error("Error fetching departments");
 			}
@@ -80,9 +83,10 @@ export const StudentRegistration = () => {
 		if (!uploadedFile) return;
 		const reader = new FileReader();
 		reader.readAsDataURL(uploadedFile);
-		reader.onload = (e) =>
-			setFormData({ ...formData, profileImage: e.target.result });
-		reader.onerror = (error) => console.error(error);
+		setFile(uploadedFile);
+		// reader.onload = (e) =>
+		// 	setFormData({ ...formData, profileImage: e.target.result });
+		// reader.onerror = (error) => console.error(error);
 	};
 
 	const validateForm = () => {
@@ -90,9 +94,11 @@ export const StudentRegistration = () => {
 		if (!formData.name) newErrors.name = "Name is required";
 		if (!formData.zone) newErrors.zone = "Zone is required";
 		if (!formData.age) newErrors.age = "Age is required";
-		if (!formData.registrationId) newErrors.ID = "ID is required";
+		if (!formData.gender) newErrors.ID = "Gender is required";
 		if (!formData.sentencedPeriod)
 			newErrors.sentencedPeriod = "Sentenced period is required";
+		if (!formData.dateOfBirth)
+			newErrors.dateOfBirth = "Birth of Date is required";
 		if (!formData.crimeType) newErrors.crimeType = "Crime type is required";
 		if (!formData.sentenceStartDate)
 			newErrors.sentenceStartDate = "Sentence start date is required";
@@ -104,8 +110,8 @@ export const StudentRegistration = () => {
 				"Release without parole date is required";
 		if (!formData.department)
 			newErrors.department = "Department is required";
-		if (!formData.profileImage)
-			newErrors.profileImage = "Profile image is required";
+		// if (!formData.profileImage)
+		// 	newErrors.profileImage = "Profile image is required";
 
 		if (
 			formData.sentenceStartDate &&
@@ -127,7 +133,7 @@ export const StudentRegistration = () => {
 					"Start date must be earlier than the end date";
 			}
 		}
-
+		console.log(newErrors);
 		setErrors(newErrors);
 		return Object.keys(newErrors).length === 0;
 	};
@@ -139,9 +145,17 @@ export const StudentRegistration = () => {
 		}
 
 		try {
+			console.log(formData);
+			const form = new FormData();
+			for (const key in formData) {
+				if (formData.hasOwnProperty(key)) {
+					form.append(key, formData[key]);
+				}
+			}
+			form.append("image", file);
 			const response = await axios.post(
-				"http://localhost:3001/register",
-				formData
+				`${process.env.API_URL}/registration/registerStudent`,
+				form
 			); // api to be corrected
 			if (response.status === 201) {
 				message.success("Student registered successfully");
@@ -149,7 +163,6 @@ export const StudentRegistration = () => {
 					name: "",
 					zone: "",
 					age: "",
-					registrationId: "",
 					sentencedPeriod: "",
 					crimeType: "",
 					sentenceStartDate: null,
@@ -159,10 +172,11 @@ export const StudentRegistration = () => {
 					language: "Amharic",
 					ethnicity: "",
 					department: "",
-					profileImage: "",
+					gender: "",
 				});
 				setErrors({});
 			} else {
+				console.log(response);
 				message.error("Error registering student");
 			}
 		} catch (error) {
@@ -203,25 +217,6 @@ export const StudentRegistration = () => {
 								)}
 							</div>
 							<div className="flex space-y-2 m-4 items-center">
-								<div className="mt-2">
-									<label htmlFor="registrationId">
-										{t("registrationId")}
-										<span className="text-red-400 m-1">
-											*
-										</span>
-									</label>
-									<Input
-										name="registrationId"
-										value={formData.registrationId}
-										onChange={handleChange}
-										className="w-16 mb-4 mx-4"
-									/>
-									{errors.registrationId && (
-										<div className="text-red-500">
-											{errors.registrationId}
-										</div>
-									)}
-								</div>
 								<div className="mt-2">
 									<label htmlFor="zone">
 										{t("zone")}
@@ -298,6 +293,36 @@ export const StudentRegistration = () => {
 								{errors.crimeType && (
 									<div className="text-red-500">
 										{errors.crimeType}
+									</div>
+								)}
+							</div>
+							<div className="flex flex-col space-y-2 mt-2">
+								<label
+									htmlFor="dateOfBirth"
+									className="uppercase text-sm mt-2"
+								>
+									{t("Birth of date")}
+									<span className="text-red-400 m-1">*</span>
+								</label>
+								<DatePicker
+									name="dateOfBirth"
+									value={
+										formData.dateOfBirth
+											? moment(formData.dateOfBirth)
+											: null
+									}
+									onChange={(date, dateString) =>
+										handleDateChange(
+											date,
+											dateString,
+											"dateOfBirth"
+										)
+									}
+									className="w-96 mb-4"
+								/>
+								{errors.dateOfBirth && (
+									<div className="text-red-500">
+										{errors.dateOfBirth}
 									</div>
 								)}
 							</div>
@@ -412,10 +437,11 @@ export const StudentRegistration = () => {
 								handleSelectChange(value, "department")
 							}
 							className="w-64 mb-4"
+							value={formData.department}
 						>
 							<Option value="">{t("enterDepartment")}</Option>
 							{departments.map((department, index) => (
-								<Option key={index} value={department.name}>
+								<Option key={index} value={department.id}>
 									{department.name}
 								</Option>
 							))}
@@ -455,6 +481,34 @@ export const StudentRegistration = () => {
 						</div>
 					</div>
 					<div className="flex mt-4">
+						<p className="uppercase p-2 mt-1">{t("gender")}:</p>
+						<div className="mt-3 ml-4">
+							<Checkbox
+								name="gender"
+								checked={formData.gender === "male"}
+								onChange={() =>
+									setFormData({ ...formData, gender: "male" })
+								}
+							>
+								{t("Male")}
+							</Checkbox>
+						</div>
+						<div className="mt-3 ml-8">
+							<Checkbox
+								name="gender"
+								checked={formData.gender === "female"}
+								onChange={() =>
+									setFormData({
+										...formData,
+										gender: "female",
+									})
+								}
+							>
+								{t("Female")}
+							</Checkbox>
+						</div>
+					</div>
+					<div className="flex mt-4">
 						<p className="uppercase p-2 mt-1">{t("language")}:</p>
 						<div className="mt-3 ml-4">
 							<Checkbox
@@ -473,15 +527,29 @@ export const StudentRegistration = () => {
 						<div className="mt-3 ml-8">
 							<Checkbox
 								name="language"
-								checked={formData.language === "AfanOromo"}
+								checked={formData.language === "Oromo"}
 								onChange={() =>
 									setFormData({
 										...formData,
-										language: "AfanOromo",
+										language: "Oromo",
 									})
 								}
 							>
 								{t("oromifa")}
+							</Checkbox>
+						</div>
+						<div className="mt-3 ml-8">
+							<Checkbox
+								name="language"
+								checked={formData.language === "English"}
+								onChange={() =>
+									setFormData({
+										...formData,
+										language: "English",
+									})
+								}
+							>
+								{t("English")}
 							</Checkbox>
 						</div>
 						<div className="mt-3 ml-8">
@@ -510,6 +578,7 @@ export const StudentRegistration = () => {
 								handleSelectChange(value, "ethnicity")
 							}
 							className="w-96 mb-4"
+							value={formData.ethnicity}
 						>
 							<Option value="">{t("entereth")}</Option>
 							{ethnicities.map((ethnicity, index) => (

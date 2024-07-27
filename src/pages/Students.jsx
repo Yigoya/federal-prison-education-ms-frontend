@@ -13,10 +13,10 @@ const Students = () => {
 		const fetchStudents = async () => {
 			try {
 				const response = await axios.get(
-					"http://localhost:3001/register"
+					`${process.env.API_URL}/student/getAllStudents`
 				); // Replace with your API endpoint
-				setStudents(response.data);
-				setFilteredStudents(response.data);
+				setStudents(response.data.students);
+				setFilteredStudents(response.data.students);
 			} catch (error) {
 				message.error("Error fetching students data");
 			}
@@ -39,8 +39,14 @@ const Students = () => {
 	};
 
 	const studentColumns = [
+		{ title: "Id", dataIndex: "id", key: "id" },
 		{ title: "Name", dataIndex: "name", key: "name" },
-		{ title: "Department", dataIndex: "department", key: "department" },
+		{
+			title: "Department",
+			dataIndex: ["department", "name"],
+			key: "department",
+		},
+		{ title: "Year", dataIndex: "year", key: "year" },
 	];
 
 	const courseColumns = [
@@ -74,7 +80,7 @@ const Students = () => {
 					<div className="w-full px-8 bg-white rounded-lg m-3 lg:mt-6 flex flex-col">
 						<div className="justify-center mb-5 items-center lg:ml-24 lg:mt-16">
 							<img
-								src={selectedStudent.profileImage}
+								src={`${process.env.API_URL}/image/${selectedStudent.image}`}
 								className="lg:w-44 w-32 lg:h-36 h-24 rounded-full"
 							/>
 						</div>
@@ -84,20 +90,6 @@ const Students = () => {
 								{selectedStudent.name}
 							</p>
 							<p className="p-2">
-								<strong className="lg:px-4">Zone:</strong>{" "}
-								{selectedStudent.zone}
-							</p>
-							<p className="p-2">
-								<strong className="lg:px-4">Age:</strong>{" "}
-								{selectedStudent.age}
-							</p>
-							<p className="p-2">
-								<strong className="lg:px-4">
-									Sentenced Period:
-								</strong>{" "}
-								{selectedStudent.sentencedPeriod}
-							</p>
-							<p className="p-2">
 								<strong className="lg:px-4">Status:</strong>{" "}
 								{selectedStudent.status}
 							</p>
@@ -105,13 +97,10 @@ const Students = () => {
 								<strong className="lg:px-4">Language:</strong>{" "}
 								{selectedStudent.language}
 							</p>
-							<p className="p-2">
-								<strong className="lg:px-4">Ethnicity:</strong>{" "}
-								{selectedStudent.ethnicity}
-							</p>
+
 							<p className="p-2">
 								<strong className="lg:px-4">Department:</strong>{" "}
-								{selectedStudent.department}
+								{selectedStudent.department.name}
 							</p>
 						</div>
 					</div>

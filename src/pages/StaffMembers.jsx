@@ -1,183 +1,210 @@
-import React from 'react'
-import { useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { useTranslation } from 'react-i18next';
-import { AiOutlineSearch } from 'react-icons/ai';
+import React, { useEffect, useState } from "react";
+import { Table, message, Input, Dropdown, Button, Popconfirm } from "antd";
+import axios from "axios";
+import { EllipsisOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
+const { Search } = Input;
 
+const StaffMembers = () => {
+	const [users, setUsers] = useState([]);
+	const [filteredUsers, setFilteredUsers] = useState([]);
+	const [selectedUser, setSelectedUser] = useState(null);
 
-const rows = [
-  { id: 1, Role: 'Teacher', DateOfBirth: '12/04/2024', HomeAddress: 'bole', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B12 R012', fullName: 'Jon Doe', emergencyContact: '0901010103', image: "https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 2, Role: 'Chief Director', DateOfBirth: '12/04/2024', HomeAddress: 'bole', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B16 R016', fullName: 'Cersei Marsi', emergencyContact: '0901010105', image: 'https://images.unsplash.com/photo-1604883781269-d121d9ad20f6?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 3, Role: 'Admin', DateOfBirth: '12/04/2024', HomeAddress: 'bole', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B17 R122', fullName: 'Jaim Lannistere', emergencyContact:'0901010109', image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 4, Role: 'Staff Coordinator', DateOfBirth: '12/04/2024', HomeAddress: 'bole', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B27 R011', fullName: 'Arya Stark', emergencyContact: '0901010100', image: 'https://images.unsplash.com/photo-1593132289185-e439d9c99c73?q=80&w=1889&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 5, Role: 'Group Leader', DateOfBirth: '12/04/2024', HomeAddress: 'bole', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B17 R017', fullName: 'Daenerys Tarag', emergencyContact: '0901010101', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 6, Role: 'Teacher', DateOfBirth: '12/04/2024', HomeAddress: 'bole', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B20 R022', fullName: 'Hanna Wonde', emergencyContact:'0901010103', image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 7, Role: 'Admin', DateOfBirth: '12/04/2024', HomeAddress: 'goro', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B25 R025', fullName: 'Ferrara Clifford', emergencyContact: '0901010101', image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  },
-  { id: 8, Role: 'Admin', DateOfBirth: '12/04/2024', HomeAddress: 'goro', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B29 R029', fullName: 'Rossini Frances', emergencyContact: '0901010101', image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  },
-  { id: 9, Role: 'Admin', DateOfBirth: '12/04/2024', HomeAddress: 'goro', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B30 R030', fullName: 'Harvey Specter', emergencyContact: '0901010107', image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  },
-  { id: 11, Role: 'Teacher', DateOfBirth: '12/04/2024', HomeAddress: 'goro', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B12 R012', fullName: 'Jon Snow', emergencyContact: '0901010101', image: "https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-  { id: 12, Role: 'Teacher', DateOfBirth: '12/04/2024', HomeAddress: 'goro', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B17 R122', fullName: 'Cersei Lannister', emergencyContact: '0901010105', image: 'https://images.unsplash.com/photo-1604883781269-d121d9ad20f6?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 13, Role: 'Teacher', DateOfBirth: '12/04/2024', HomeAddress: 'goro', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B17 R122', fullName: 'Jaime Stark', emergencyContact:'0901010109', image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 14, Role: 'Teacher', DateOfBirth: '12/04/2024', HomeAddress: 'goro', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B27 R011', fullName: 'Arya Tarek', emergencyContact: '0901010101', image: 'https://images.unsplash.com/photo-1593132289185-e439d9c99c73?q=80&w=1889&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 15, Role: 'Teacher', DateOfBirth: '12/04/2024', HomeAddress: 'goro', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B17 R017', fullName: 'Daenerys Glims', emergencyContact: '0901010129', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 16, Role: 'Assistant', DateOfBirth: '12/04/2024', HomeAddress: 'goro', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B20 R022', fullName: 'Hanna Tarik', emergencyContact:'0901010103', image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-  { id: 17, Role: 'Assistant', DateOfBirth: '12/04/2024', HomeAddress: 'goro', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B25 R025', fullName: 'Ferrara Cliff', emergencyContact: '0901010101', image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  },
-  { id: 18, Role: 'Assistant', DateOfBirth: '12/04/2024', HomeAddress: 'goro', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B29 R029', fullName: 'Rossini Glims', emergencyContact: '0901010101', image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  },
-  { id: 19, Role: 'Assistant', DateOfBirth: '12/04/2024', HomeAddress: 'goro', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B30 R030', fullName: 'Harvey Grof', emergencyContact: '0901010107', image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  },
-  { id: 20, Role: 'Assistant', DateOfBirth: '12/04/2024', HomeAddress: 'goro', email: 'someone@smt.com', phone: '0901010101', officeLocation: 'B30 R030', fullName: 'Harvey Grof', emergencyContact: '0901010107', image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?q=80&w=1536&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'  },
-];
+	useEffect(() => {
+		const fetchUsers = async () => {
+			try {
+				const response = await axios.get(
+					`${process.env.API_URL}/user/getAllUsers`
+				);
+				if (response.status === 200) {
+					setUsers(response.data.users);
+					setFilteredUsers(response.data.users);
+				} else if (response.status === 404) {
+					message.error("No user found");
+				} else {
+					message.error("Error fetching users data");
+				}
+			} catch (error) {
+				message.error("No user found");
+			}
+		};
 
-function StaffMembers() {
-  const {t} =useTranslation();
-  const columns = [
-    {
-      field: 'image',
-      headerName: t('profile'),
-      width: 130,
-      editable: true,
-      renderCell: (params) => (
-        <img src={params.value} className='h-10 w-10 rounded-3xl' alt='Profile' />
-      ),
-    },
-    { field: 'fullName', headerName: t('Full name'), width: 130 },
-    { field: 'Role', headerName: t('Role'), width: 130 },
-    { field: 'id', headerName: t('ID'), width: 130 },
-  ];
-  
-  const [selectedRow, setSelectedRow] = useState({id: 0,Role: 'Y', fullName: 'X', image: 'https://img.freepik.com/premium-vector/user-vector-icon-outline-style-isolated-white-background-mobile-app-website-logotype-ui-human-symbol-man-silhouette-social-member-sign-personal-profile-sign-10-eps_824631-3088.jpg?w=740'});
+		fetchUsers();
+	}, []);
 
-  const handleRowClick = (row) => {
-    setSelectedRow(row);
-  };
+	const handleRowClick = (record) => {
+		setSelectedUser(record);
+	};
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const fetchData = (value) => {
-    fetch()
-    .then((response) => response.json())
-    .then((json) => {
-      const results = json.filter((user) =>{
-        return (
-          value &&
-          user&&
-          user.name&&
-          user.name.toLowerCase().includes(value)
-        );
-      });
-      console.log(results);
-    })
-  }
+	const handleSearch = (value) => {
+		const filteredData = users.filter(
+			(user) =>
+				user.name.toLowerCase().includes(value.toLowerCase()) ||
+				user.id.toString().includes(value)
+		);
+		setFilteredUsers(filteredData);
+	};
 
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-    // fetchData(event.target.value);
-  };
+	const confirm = (e, id) => {
+		try {
+			const response = axios.delete(
+				`${process.env.API_URL}/user/deleteUser/${e}`
+			);
+			message.success("User deleted successfully");
+		} catch (error) {
+			message.error("Failed to delete the user");
+		}
+		console.log(e);
+		message.success("Click on Yes");
+	};
 
-  const filteredRows = rows.filter((row) =>
-    `${row.fullName}`.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  
+	const action = (id) => [
+		{
+			key: "1",
+			label: (
+				<Link
+					to={`/editstaff/${id}`}
+					type="text"
+					style={{
+						color: "#1890ff",
+					}}
+					className="w-full"
+				>
+					Edit
+				</Link>
+			),
+		},
+		{
+			key: "2",
+			label: (
+				<Popconfirm
+					title="Delete the task"
+					description="Are you sure to delete this task?"
+					onConfirm={() => confirm(id)}
+					okText="Yes"
+					cancelText="No"
+				>
+					<p
+						type="text"
+						style={{
+							color: "red",
+						}}
+						className="w-full"
+					>
+						Delete
+					</p>
+				</Popconfirm>
+			),
+		},
+	];
 
+	const userColumns = [
+		{
+			title: "Profile",
+			dataIndex: "image",
+			render: (image) => {
+				return (
+					<img
+						src={`${process.env.API_URL}/image/${image}`}
+						className=" w-8 h-8 rounded-full"
+					/>
+				);
+			},
+			key: "image",
+		},
+		{ title: "Id", dataIndex: "id", key: "id" },
+		{ title: "Name", dataIndex: "name", key: "name" },
 
+		{ title: "Role", dataIndex: "role", key: "role" },
+		{
+			render: (_, record) => (
+				<Dropdown
+					menu={{ items: action(record.id) }}
+					trigger={["click"]}
+				>
+					<Button type="text" icon={<EllipsisOutlined />} />
+				</Dropdown>
+			),
+		},
+	];
 
+	const courseColumns = [
+		{ title: "Completed", dataIndex: "completed", key: "completed" },
+		{ title: "Ongoing", dataIndex: "ongoing", key: "ongoing" },
+		{ title: "Future", dataIndex: "future", key: "future" },
+	];
 
-  
-  return (
+	return (
+		<div className="m-8 p-8 bg-white rounded-lg">
+			<h1 className="text-2xl font-bold mb-4">Registered Users</h1>
+			<div className="flex justify-between items-center">
+				<Search
+					placeholder="Search by Name or ID"
+					enterButton="Search"
+					size="medium"
+					onSearch={handleSearch}
+					className="mb-4 w-72 ml-16"
+				/>
+				<Link
+					to="/addstaff"
+					className="bg-[#1e67d4] hover:scale-110 text-white font-bold py-1 px-4 rounded-lg mb-4"
+				>
+					Add Course
+				</Link>
+			</div>
+			<div className="lg:flex justify-evenly p-4 mx-10 bg-gray-100 rounded-lg">
+				<div className="w-full px-8 m-3 mt-6">
+					<Table
+						dataSource={filteredUsers}
+						columns={userColumns}
+						rowKey="id"
+						onRow={(record) => ({
+							onClick: () => handleRowClick(record),
+						})}
+					/>
+				</div>
+				{selectedUser && (
+					<div className="w-full px-8 bg-white rounded-lg m-3 lg:mt-6 flex flex-col">
+						<div className="justify-center mb-5 items-center lg:ml-24 lg:mt-16">
+							<img
+								src={`${process.env.API_URL}/image/${selectedUser.image}`}
+								className="lg:w-44 w-32 lg:h-36 h-24 rounded-full"
+							/>
+						</div>
+						<div className="mt-3">
+							<p className="p-2">
+								<strong className="lg:px-4">Name:</strong>{" "}
+								{selectedUser.name}
+							</p>
+							<p className="p-2">
+								<strong className="lg:px-4">Email:</strong>{" "}
+								{selectedUser.email}
+							</p>
+							<p className="p-2">
+								<strong className="lg:px-4">Phone:</strong>{" "}
+								{selectedUser.phone}
+							</p>
+							<p className="p-2">
+								<strong className="lg:px-4">Role:</strong>{" "}
+								{selectedUser.role}
+							</p>
+							<p className="p-2">
+								<strong className="lg:px-4">Hired Date:</strong>{" "}
+								{selectedUser.hireDate}
+							</p>
+							<p className="p-2">
+								<strong className="lg:px-4">
+									Education Level:
+								</strong>{" "}
+								{selectedUser.educationLevel}
+							</p>
+						</div>
+					</div>
+				)}
+			</div>
+		</div>
+	);
+};
 
-    <div className='flex mt-5'>
-      <div className='m-1 bg-white w-3/5 h-full rounded-2xl'>
-       <form className='w-[440px] relative m-5'> 
-        <div className='relative'>
-          <input type='search' placeholder='Search by Id or name' className='w-full p-4 rounded-full bg-slate-100 shadow-inner'  label = "Search" value={searchTerm} onChange={handleSearch} />
-          <button className='absolute left-1 top-1/2 -translate-y-1/2 p-4 rounded-full bg-blue-500 text-white'>
-            <AiOutlineSearch/>
-          </button>
-        </div>
-
-        {
-          searchTerm.length > 0 &&(
-            <div className='absolute top-20 w-full bg-white shadow-xl rounded-xl left-0 p-4 z-10'>
-              {
-               filteredRows.map((row, index) => (
-                  <div key={index}className="block p-2 rounded bg-blue-50 hover:bg-blue-100 cursor-pointer" onClick={() => handleRowClick(row)}>{`${row.fullName}`}</div>
-                ))
-              }
-            </div>
-          )
-        }
-       </form> 
-
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          autoHeight={true}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 10 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          onRowClick={(params) => handleRowClick(params.row)}
-        />
-      </div>
-      {selectedRow && (
-        <div className='m-1 bg-white h-100% w-2/5 rounded-2xl'>
-          <div className='mt-4 mb-8 ml-4 font-bold text-2xl'>
-            <h1>{t('personalInfo')}</h1>
-          </div>
-
-          <div className='flex flex-col place-items-center'>
-            <img src={selectedRow.image} alt="Profile" className='h-44 w-44 mb-4 rounded-full'/>
-            <h1 className='text-xl font-semibold'>{selectedRow.fullName} {selectedRow.Role}</h1>
-            <h2 >FPS {selectedRow.id}</h2>
-          </div>
-
-          <div>
-                <h1 className='text-xl font-semibold ml-4 mb-4'>{t('basicDetail')} :</h1>
-                <table className='ml-8'>
-                    <tbody>
-                      <tr>
-                        <td>{t('Role')} </td>
-                        <td className='w-20 pl-10'>: </td>
-                        <td className="font-semibold">{selectedRow.Role}</td>
-                      </tr>
-                      <tr>
-                        <td>{t('Date of birth')} </td>
-                        <td className='w-20 pl-10'>: </td>
-                        <td className="font-semibold">{selectedRow.DateOfBirth}</td>
-                      </tr>
-                      <tr>
-                        <td>{t('Home Address')} </td>
-                        <td className='w-20 pl-10'>: </td>
-                        <td className="font-semibold">{selectedRow.HomeAddress}</td>
-                      </tr>
-                      <tr>
-                        <td>{t('email')} </td>
-                        <td className='w-20 pl-10'>: </td>
-                        <td className="font-semibold">{selectedRow.email}</td>
-                      </tr>
-                      <tr>
-                        <td>{t('phoneNo')}</td>
-                        <td className='w-20 pl-10'>: </td>
-                        <td className="font-semibold">{selectedRow.phone}</td>
-                      </tr>
-                      <tr>
-                        <td>{t('Emergency Contact')}</td>
-                        <td className='w-20 pl-10'>: </td>
-                        <td className="font-semibold">{selectedRow.emergencyContact}</td>
-                      </tr>
-                      <tr>
-                        <td>{t('Office Location')}</td>
-                        <td className='w-20 pl-10'>: </td>
-                        <td className="font-semibold">{selectedRow.officeLocation}</td>
-                      </tr>
-                    </tbody>
-                </table>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export default StaffMembers
+export default StaffMembers;

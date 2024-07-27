@@ -31,7 +31,21 @@ const RootLayout = () => {
 				Registration
 			</Link>,
 			"Registration",
-			<DashboardIcon style={{ fontSize: "20px" }} />
+			<DashboardIcon style={{ fontSize: "20px" }} />,
+			[
+				getItem(
+					<Link to="/register" className="text-sm">
+						Register Student
+					</Link>,
+					"Register Student"
+				),
+				getItem(
+					<Link to="/verfystudent" className="text-sm">
+						Verify Student
+					</Link>,
+					"Register"
+				),
+			]
 		),
 		getItem(
 			<Link to="/students" className="text-base">
@@ -64,6 +78,33 @@ const RootLayout = () => {
 						Manage Course
 					</Link>,
 					"Manage Courses"
+				),
+			]
+		),
+		getItem(
+			<Link to="/departments" className="text-base">
+				Department
+			</Link>,
+			"Department",
+			<DashboardIcon style={{ fontSize: "20px" }} />,
+			[
+				getItem(
+					<Link to="/alldepartment" className="text-sm">
+						All Department
+					</Link>,
+					"All Departments"
+				),
+				getItem(
+					<Link to="/adddepartment" className="text-sm">
+						Add Department
+					</Link>,
+					"Add Department"
+				),
+				getItem(
+					<Link to="/managedepartment" className="text-sm">
+						Manage Department
+					</Link>,
+					"Manage department"
 				),
 			]
 		),
