@@ -15,9 +15,12 @@ const Students = () => {
 				const response = await axios.get(
 					`${process.env.API_URL}/student/getAllStudents`
 				); // Replace with your API endpoint
+
+				console.log(response.data);
 				setStudents(response.data.students);
 				setFilteredStudents(response.data.students);
 			} catch (error) {
+				console.error("Error fetching students data:", error);
 				message.error("Error fetching students data");
 			}
 		};

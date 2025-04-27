@@ -42,10 +42,13 @@ const AddDepartment = ({ isEdit }) => {
 				const response = await axios.get(
 					`${process.env.API_URL}/course/getAllCourses`
 				); // Replace with your API endpoint
+				console.log(response.data)
+
 				let courses = response.data.courses.map((course) => ({
 					value: course.id,
 					label: course.name,
 				}));
+				
 				setCourses(courses); // Assuming the response data is an array
 			} catch (error) {
 				console.error("Error fetching data:", error);
@@ -55,10 +58,12 @@ const AddDepartment = ({ isEdit }) => {
 				const response = await axios.get(
 					`${process.env.API_URL}/college/getAllColleges`
 				); // Replace with your API endpoint
+				console.log(response.data)
 				let courses = response.data.colleges.map((college) => ({
 					value: college.id,
 					label: college.name,
 				}));
+				
 				setCollege(courses); // Assuming the response data is an array
 			} catch (error) {
 				console.error("Error fetching data:", error);
@@ -75,7 +80,7 @@ const AddDepartment = ({ isEdit }) => {
 				const response = await axios.get(
 					`${process.env.API_URL}/department/getAllDepartments`
 				); // Replace with your API endpoint
-				setOptions(response.data.departments); // Assuming the response data is an array
+				setOptions(response.data.data); // Assuming the response data is an array
 			} catch (error) {
 				console.error("Error fetching data:", error);
 				setApiError("Failed to fetch department options.");
