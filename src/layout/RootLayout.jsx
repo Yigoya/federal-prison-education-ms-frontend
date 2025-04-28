@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Layout, Menu, Typography, theme } from "antd";
+import { Layout, Menu, Typography, theme, Button, Dropdown } from "antd";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../assets/images/fdre_logo.png";
 import Avatar from "../assets/images/Avatar.jpg";
-
+import { useTranslation } from "react-i18next";
+import { GlobalOutlined } from "@ant-design/icons";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -20,31 +21,47 @@ function getItem(label, key, icon, children) {
 const RootLayout = () => {
 	const [current, setCurrent] = useState("Dashboard");
 	const { Title, Text } = Typography;
+	const { t, i18n } = useTranslation();
+
+	const changeLanguage = (lng) => {
+		i18n.changeLanguage(lng);
+	};
+
+	const languageItems = [
+		{
+			key: "en",
+			label: <span onClick={() => changeLanguage("en")}>English</span>,
+		},
+		{
+			key: "am",
+			label: <span onClick={() => changeLanguage("am")}>{t("amharic")}</span>,
+		},
+	];
 
 	const items = [
 		getItem(
 			<Link to="/" className="text-base">
-				DashBoard
+				{t("DashBoard")}
 			</Link>,
 			"DashBoard",
 			<DashboardIcon style={{ fontSize: "20px" }} />
 		),
 		getItem(
 			<Link to="/register" className="text-base">
-				Registration
+				{t("Registration")}
 			</Link>,
 			"Registration",
 			<DashboardIcon style={{ fontSize: "20px" }} />,
 			[
 				getItem(
 					<Link to="/register" className="text-sm">
-						Register Student
+						{t("Register Student")}
 					</Link>,
 					"Register Student"
 				),
 				getItem(
 					<Link to="/verfystudent" className="text-sm">
-						Verify Student
+						{t("Verify Student")}
 					</Link>,
 					"Register"
 				),
@@ -52,33 +69,33 @@ const RootLayout = () => {
 		),
 		getItem(
 			<Link to="/students" className="text-base">
-				Student
+				{t("Student")}
 			</Link>,
 			"Student",
 			<DashboardIcon style={{ fontSize: "20px" }} />
 		),
 		getItem(
 			<Link to="/courses" className="text-base">
-				Course
+				{t("Course")}
 			</Link>,
 			"Course",
 			<DashboardIcon style={{ fontSize: "20px" }} />,
 			[
 				getItem(
 					<Link to="/allcourse" className="text-sm">
-						All Courses
+						{t("All Courses")}
 					</Link>,
 					"All Courses"
 				),
 				getItem(
 					<Link to="/addcourse" className="text-sm">
-						Add Course
+						{t("Add Course")}
 					</Link>,
 					"Add Courses"
 				),
 				getItem(
 					<Link to="/managecourse" className="text-sm">
-						Manage Course
+						{t("Manage Course")}
 					</Link>,
 					"Manage Courses"
 				),
@@ -86,26 +103,26 @@ const RootLayout = () => {
 		),
 		getItem(
 			<Link to="/departments" className="text-base">
-				Department
+				{t("Department")}
 			</Link>,
 			"Department",
 			<DashboardIcon style={{ fontSize: "20px" }} />,
 			[
 				getItem(
 					<Link to="/alldepartment" className="text-sm">
-						All Department
+						{t("All Department")}
 					</Link>,
 					"All Departments"
 				),
 				getItem(
 					<Link to="/adddepartment" className="text-sm">
-						Add Department
+						{t("Add Department")}
 					</Link>,
 					"Add Department"
 				),
 				getItem(
 					<Link to="/managedepartment" className="text-sm">
-						Manage Department
+						{t("Manage Department")}
 					</Link>,
 					"Manage department"
 				),
@@ -113,28 +130,28 @@ const RootLayout = () => {
 		),
 		getItem(
 			<Link to="/classroom" className="text-base">
-				Class Room
+				{t("Class Room")}
 			</Link>,
 			"Class Room",
 			<DashboardIcon style={{ fontSize: "20px" }} />
 		),
 		getItem(
 			<Link to="/grading" className="text-base">
-				Grading
+				{t("Grading")}
 			</Link>,
 			"Grading",
 			<DashboardIcon style={{ fontSize: "20px" }} />
 		),
 		getItem(
 			<Link to="/staffprofile" className="text-base">
-				Staff profile
+				{t("Staff profile")}
 			</Link>,
 			"Staff profile",
 			<DashboardIcon style={{ fontSize: "20px" }} />
 		),
 		getItem(
 			<Link to="/examscheduling" className="text-base">
-				Exam Scheduling
+				{t("Exam Scheduling")}
 			</Link>,
 			"Exam Scheduling",
 			<DashboardIcon style={{ fontSize: "20px" }} />
@@ -168,8 +185,8 @@ const RootLayout = () => {
 						<img src={logo} alt="logo" />
 					</div>
 					<div className="text">
-						<h1 className="text-base">College Management</h1>
-						<p className="text-sm opacity-75">Kilinto Maremia</p>
+						<h1 className="text-base">{t("College Management")}</h1>
+						<p className="text-sm opacity-75">{t("Kilinto Maremia")}</p>
 					</div>
 				</div>
 				<Menu
@@ -194,17 +211,28 @@ const RootLayout = () => {
 					}}
 				>
 					<div className="flex flex-row gap-2 items-center justify-between py-4 px-8">
-						<Title level={4}>{current}</Title>
-						<div className="flex flex-row gap-2 items-center">
-							<div className="logo w-14">
-								<img
-									src={Avatar}
-									alt="logo"
-								/>
-							</div>
-							<div className="text">
-								<h1 className="text-base">John Peter</h1>
-								<p className="text-sm opacity-75">teacher</p>
+						<Title level={4}>{t(current)}</Title>
+						<div className="flex flex-row gap-4 items-center">
+							<Dropdown
+								menu={{ items: languageItems }}
+								placement="bottomRight"
+								arrow
+							>
+								<Button type="text" icon={<GlobalOutlined />}>
+									{i18n.language === "en" ? "English" : t("amharic")}
+								</Button>
+							</Dropdown>
+							<div className="flex flex-row gap-2 items-center">
+								<div className="logo w-14">
+									<img
+										src={Avatar}
+										alt="logo"
+									/>
+								</div>
+								<div className="text">
+									<h1 className="text-base">John Peter</h1>
+									<p className="text-sm opacity-75">{t("teacher")}</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -222,26 +250,11 @@ const RootLayout = () => {
 						textAlign: "center",
 					}}
 				>
-					The Footer
+					{t("The Footer")}
 				</Footer>
 			</Layout>
 		</Layout>
 	);
 };
-// export default App;
-
-// function RootLayout() {
-//   return (
-//     <div className='flex flex-row w-full h-screen gap-8 bg-[#E9E9E9]'>
-//       <SideBar />
-//       <div className='w-full h-screen'>
-//         <Navbar />
-//         <section >
-//             <Outlet />
-//         </section>
-//       </div>
-//     </div>
-//   )
-// }
 
 export default RootLayout;
