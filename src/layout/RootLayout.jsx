@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Layout, Menu, Typography, theme } from "antd";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { Link, Outlet } from "react-router-dom";
+import logo from "../assets/images/fdre_logo.png";
+import Avatar from "../assets/images/Avatar.jpg";
+
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -162,7 +165,7 @@ const RootLayout = () => {
 				<div className="demo-logo-vertical" />
 				<div className="flex flex-row gap-2 items-center m-2 mb-6 mt-4">
 					<div className="logo w-14">
-						<img src="src/assets/images/fdre_logo.png" alt="logo" />
+						<img src={logo} alt="logo" />
 					</div>
 					<div className="text">
 						<h1 className="text-base">College Management</h1>
@@ -195,7 +198,7 @@ const RootLayout = () => {
 						<div className="flex flex-row gap-2 items-center">
 							<div className="logo w-14">
 								<img
-									src="src/assets/images/Avatar.jpg"
+									src={Avatar}
 									alt="logo"
 								/>
 							</div>
