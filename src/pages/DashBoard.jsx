@@ -42,7 +42,7 @@ function DashBoard()
         <div className='lg:flex bg-white rounded-2xl m-16 justify-between w-full  '>
                 <div>
                 <div className='mr-32'>
-                          <Link to='/studentregistration'> 
+                          <Link to='/register'> 
                 <div className='p-4 flex bg-gradient-to-l from-blue-200 to-blue-600 rounded-2xl m-8 '>
                   <div>
                             <h1 className='text-1xl font-bold text-gray-200 text-center'>{t('registerStudent')}</h1>
@@ -74,7 +74,7 @@ function DashBoard()
                 </div>
                 <div>
                 <div className='mr-32'>
-                          <Link to='/register'> 
+                          <Link to='/students'> 
                 <div className='p-4 flex bg-gradient-to-l from-blue-200 to-blue-600 rounded-2xl m-8'>
                   <div>
                             <h1 className='text-1xl font-bold text-gray-200 text-center '>{t('viewStudent')}</h1>
@@ -89,7 +89,7 @@ function DashBoard()
               </div>
             <div> 
               <div className='mr-32'>
-                          <Link to='/register'> 
+                          <Link to='/staffprofile'> 
                 <div className='p-4 flex bg-gradient-to-l from-blue-200 to-blue-600 rounded-2xl m-8'>
                   <div>
                             <h1 className='text-1xl font-bold text-gray-200 text-center '>{t('viewStaff')}</h1>

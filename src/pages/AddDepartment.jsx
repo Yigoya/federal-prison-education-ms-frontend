@@ -79,8 +79,9 @@ const AddDepartment = ({ isEdit }) => {
 			try {
 				const response = await axios.get(
 					`${process.env.API_URL}/department/getAllDepartments`
+
 				); // Replace with your API endpoint
-				setOptions(response.data.data); // Assuming the response data is an array
+				setOptions(response.data.departments); // Assuming the response data is an array
 			} catch (error) {
 				console.error("Error fetching data:", error);
 				setApiError("Failed to fetch department options.");
